@@ -2,28 +2,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
-    private List tasks = new ArrayList<>();
+    private final List<String> tasks = new ArrayList<>();
 
-    public void addTask(String t) {
-        tasks.add(t);
-        System.out.println("Task added.");
-    }
-
-    public void listTasks() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("Task " + (i + 1) + ": " + tasks.get(i));
+    public void addTask(String taskDescription) {
+        if (taskDescription == null || taskDescription.trim().isEmpty()) {
+            throw new IllegalArgumentException("Task description cannot be empty.");
         }
+        if (tasks.contains(taskDescription)) {
+            throw new IllegalArgumentException("Duplicate task.");
+        }
+        tasks.add(taskDescription);
     }
 
-    public void removeTask(int id) {
-        tasks.remove(id - 1);
-        System.out.println("Task removed.");
+    public List<String> getTasks() {
+        return new ArrayList<>(tasks);
     }
 
-    public static void main(String[] args) {
-        TaskManager tm = new TaskManager();
-        tm.addTask("Complete project");
-        tm.listTasks();
-        tm.removeTask(1);
+    public String removeTask(int index) {
+        if (index < 1 || index > tasks.size()) {
+            throw new IndexOutOfBoundsException("Invalid task ID.");
+        }
+        return tasks.remove(index - 1);
     }
 }
