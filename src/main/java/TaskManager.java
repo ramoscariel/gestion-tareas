@@ -6,7 +6,7 @@ public class TaskManager {
 
     public void addTask(String taskDescription) {
         if (taskDescription == null || taskDescription.trim().isEmpty()) {
-            throw new IllegalArgumentException("Task description cannot be empty.");
+            //throw new IllegalArgumentException("Task description cannot be empty.");
         }
         if (tasks.contains(taskDescription)) {
             throw new IllegalArgumentException("Duplicate task.");
